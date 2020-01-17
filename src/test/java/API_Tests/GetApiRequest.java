@@ -95,6 +95,10 @@ public class GetApiRequest {
         Assert.assertEquals(count,4);
     }
 
+    /**
+     * Get from previous response any image url from products -> images
+     * Make GET request and check if image has got width 300 px
+     */
     @Test
     public void testApiLetterB(){
 

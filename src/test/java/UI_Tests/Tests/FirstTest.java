@@ -20,10 +20,13 @@ public class FirstTest {
     public void firstTestWhoWeServeItems() throws InterruptedException {
         WileyHomePage objWHP = new WileyHomePage(driver);
 
+        //then I opened url appear choice location window
         objWHP.clickYesInChoseLocationWindow();
 
-        objWHP.clickWhoWeServeMenuList();
+        //move to Who We Serve button
+        objWHP.moveToButtonWhoWeServeMenuList();
 
+        //check every menu item by task:  Titles are “Students”, “Instructors”, “Book Authors”, “Professionals”, “Researchers”, “Institutions”, “Librarians”, “Corporations”, “Societies”, “Journal Editors”, “Government” 
         objWHP.checkWhoWeServeMenuListItemStudents();
         objWHP.checkWhoWeServeMenuListInstructors();
         objWHP.checkWhoWeServeMenuListBookAuthors();
@@ -36,6 +39,7 @@ public class FirstTest {
         objWHP.checkWhoWeServeMenuListJournalEditors();
         objWHP.checkWhoWeServeMenuListGovernment();
 
+        //check that 11 items
         objWHP.checkThatInWhoWeServe11Items();
     }
 

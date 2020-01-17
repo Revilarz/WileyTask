@@ -9,9 +9,6 @@ public class PostApiRequest {
 
     public void testPostRequestNegative(String strTime){
         Response resp = RestAssured.post("https://httpbin.org/delay/"+strTime);
-       /* System.out.println("Выставленное значение - "+strTime);
-        System.out.println(resp.time() + " с");
-        System.out.println("status code - "+resp.getStatusCode());*/
         Assert.assertNotEquals(resp.getStatusCode(),200);
     }
 

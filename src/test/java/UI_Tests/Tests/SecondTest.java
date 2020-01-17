@@ -20,15 +20,23 @@ public class SecondTest {
     public void secondTestSearchBox() throws InterruptedException {
         WileyHomePage objWHP = new WileyHomePage(driver);
 
+        //then I opened url appear choice location window
         objWHP.clickYesInChoseLocationWindow();
 
+        //Enter “Java” in the search input and do not press the search button
         objWHP.inputWordInSearchBox("Java");
+
+        //check appear Area with related content
         objWHP.checkAppearContextMenu();
 
-        objWHP.getTopYAndHeightOfSearchBox();
-        objWHP.getTopYOfContextMenu();
+        //check no crossing and no distance by Y
+        objWHP.checkByHeightAndY();
 
-        objWHP.checkContextMenuUnderSearchBox();
+        //check that whey have the same X pos
+        objWHP.checkByXPos();
+
+        //check that whey have the same X width
+        objWHP.checkByWidth();
     }
 
     @After

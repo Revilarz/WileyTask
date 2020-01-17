@@ -20,12 +20,22 @@ public class ForthTest{
     public void firstTestWhoWeServeItems() throws InterruptedException {
         WileyHomePage objWHP = new WileyHomePage(driver);
 
+        //then I opened url appear choice location window
         objWHP.clickYesInChoseLocationWindow();
 
+        //Go to “Subjects” top menu
         objWHP.clickSubjectsMenuList();
-        objWHP.checkThatEducationIsDisplayed();
-        objWHP.moveOnEducationMenuSubjectsItem();
 
+        // Check “Education” header is displayed 
+        objWHP.checkThatEducationIsDisplayed();
+
+        //select “Education” 
+        objWHP.clickOnEducationMenuSubjectsItem();
+
+        //check that title “Subjects” is Displayed on the left side
+        objWHP.checkSubjectsTitlePosition();
+
+        //check that all 13 “Subjects” items is Displayed under title
         objWHP.checkInformationLibraryScienceSubjectsItem();
         objWHP.checkEducationPublicPolicySubjectsItem();
         objWHP.checkK12GeneralSubjectsItem();
@@ -40,6 +50,7 @@ public class ForthTest{
         objWHP.checkLiteracyAndReadingSubjectsItem();
         objWHP.checkClassroomManagementSubjectsItem();
 
+        //check that 13 items on Subjects menu
         objWHP.countSubjectItems();
 
     }

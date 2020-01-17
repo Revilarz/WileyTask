@@ -28,18 +28,15 @@ public class WileyHomePage {
     private By menuWhoWeServeItems = By.xpath(".//*[@id=\"Level1NavNode1\"]//*[@class=\"dropdown-item \"]");
 
     private By searchBox = By.id("js-site-search-input");
-    private By contextMenu = By.id("ui-id-2");
-
-    private int searchBoxTopYPos;
-    private int contextMenuTopYPos;
-    private int searchBoxHeight;
-
     private By searchButton = By.className("input-group-btn");
+    private By contextMenu = By.id("ui-id-2");
 
     private By buttonSubjects = By.xpath(".//*[@href=\"/en-us/subjects\"]");
 
     private By educationMenuSubjectsItem = By.xpath(".//*[@href=\"/en-us/Education-c-ED00\"]");
 
+    private By titleSubjects = By.xpath(".//*[@class=\"side-panel\"]//*[contains(text(),'Subjects')]");
+    private int titleSubjectSize;
     private By menuItemInformationLibraryScience = By.xpath(".//*[@class=\"side-panel\"]//*[contains(text(),'Information & Library Science')]");
     private By menuItemEducationPublicPolicy = By.xpath(".//*[@class=\"side-panel\"]//*[contains(text(),'Education & Public Policy')]");
     private By menuItemK12General = By.xpath(".//*[@class=\"side-panel\"]//*[contains(text(),'K-12 General')]");
@@ -67,7 +64,7 @@ public class WileyHomePage {
     /**
      * Move on main-menu item Who We Serve
      */
-    public void clickWhoWeServeMenuList() throws InterruptedException {
+    public void moveToButtonWhoWeServeMenuList() throws InterruptedException {
         Actions action = new Actions(driver);
         WebElement btn = driver.findElement(buttonWhoWeServe);
         action.moveToElement(btn).build().perform();
@@ -182,7 +179,7 @@ public class WileyHomePage {
     }
 
     /**
-     *Enter “Java” in the search input
+     * Enter “Java” in the search input
      */
     public void inputWordInSearchBox(String strWord) throws InterruptedException {
         driver.findElement(searchBox).sendKeys(strWord);
@@ -197,27 +194,33 @@ public class WileyHomePage {
     }
 
     /**
-     * Get Y left top point and Height of search header 
+     * Check no cross and no distance
      */
-    public void getTopYAndHeightOfSearchBox() {
-        searchBoxTopYPos = driver.findElement(searchBox).getLocation().y;
-        searchBoxHeight = driver.findElement(searchBox).getSize().height;
+    public void checkByHeightAndY() {
+        int searchBoxTopYPos = driver.findElement(searchBox).getLocation().y;
+        int searchBoxHeight = driver.findElement(searchBox).getSize().height;
+        int contextMenuTopYPos = driver.findElement(contextMenu).getLocation().y;
+        Assert.assertEquals((contextMenuTopYPos - searchBoxTopYPos), searchBoxHeight);
     }
 
     /**
-     * Get Y left top point of area under the search header 
+     * Check by x - searchBoxXPos = contextMenuXPos
      */
-    public void getTopYOfContextMenu() {
-        contextMenuTopYPos = driver.findElement(contextMenu).getLocation().y;
+    public void checkByXPos() {
+        int searchBoxXPos = driver.findElement(searchBox).getLocation().x;
+        int contextMenuXPos = driver.findElement(contextMenu).getLocation().x;
+        Assert.assertEquals(searchBoxXPos,contextMenuXPos);
     }
 
     /**
-     * Area with related content is displayed right under the search header 
+     * Check by Width - inputGroupWidth = contextMenuWidth
      */
-    public void checkContextMenuUnderSearchBox() {
-        int minSearchBoxHeight = contextMenuTopYPos - searchBoxTopYPos;
-        //System.out.println(minSearchBoxHeight+"<"+searchBoxHeight);
-        Assert.assertTrue(minSearchBoxHeight <= searchBoxHeight);
+    public void checkByWidth() {
+        int searchBoxWidth = driver.findElement(searchBox).getSize().width;
+        int searchButtonWidth = driver.findElement(searchButton).getSize().width;
+        int inputGroupWidth = searchBoxWidth+searchButtonWidth;
+        int contextMenuWidth = driver.findElement(contextMenu).getSize().width;
+        Assert.assertEquals(inputGroupWidth, contextMenuWidth);
     }
 
     /**
@@ -238,7 +241,7 @@ public class WileyHomePage {
         Thread.sleep(3000);
     }
 
-    public void checkThatEducationIsDisplayed(){
+    public void checkThatEducationIsDisplayed() {
         driver.findElement(educationMenuSubjectsItem).isDisplayed();
         //System.out.println(driver.findElement(educationMenuSubjectsItem).getLocation().x);
         //System.out.println(driver.findElement(educationMenuSubjectsItem).getSize().width);
@@ -247,7 +250,7 @@ public class WileyHomePage {
     /**
      * Click on Subject menu-item Education
      */
-    public void moveOnEducationMenuSubjectsItem() throws InterruptedException {
+    public void clickOnEducationMenuSubjectsItem() throws InterruptedException {
         action = new Actions(driver);
         WebElement btn = driver.findElement(educationMenuSubjectsItem);
         action.moveToElement(btn).click().build().perform();
@@ -260,7 +263,20 @@ public class WileyHomePage {
     public void checkEducationPublicPolicySubjectsItem() {
         driver.findElement(menuItemEducationPublicPolicy).isDisplayed();
         Assert.assertTrue((driver.findElement(menuItemEducationPublicPolicy).getLocation().x
-        +driver.findElement(menuItemEducationPublicPolicy).getSize().width)<620);
+                + driver.findElement(menuItemEducationPublicPolicy).getSize().width) < 620);
+    }
+
+    /**
+     * Check that title "Subjects" is Displayed and on the left side (620 is a half of main-sticky-header
+     * (main header panel) = 1240, if x top left position plus width less then 620 it means that it on left side)
+     */
+    public void checkSubjectsTitlePosition() {
+        driver.findElement(titleSubjects).isDisplayed();
+        Assert.assertTrue((driver.findElement(titleSubjects).getLocation().x
+                + driver.findElement(titleSubjects).getSize().width) < 620);
+        titleSubjectSize = driver.findElement(titleSubjects).getLocation().x
+                + driver.findElement(titleSubjects).getSize().width;
+
     }
 
     /**
@@ -269,7 +285,7 @@ public class WileyHomePage {
     public void checkInformationLibraryScienceSubjectsItem() {
         driver.findElement(menuItemInformationLibraryScience).isDisplayed();
         Assert.assertTrue((driver.findElement(menuItemInformationLibraryScience).getLocation().x
-                +driver.findElement(menuItemInformationLibraryScience).getSize().width)<620);
+                + driver.findElement(menuItemInformationLibraryScience).getSize().width) <= titleSubjectSize);
     }
 
     /**
@@ -278,7 +294,7 @@ public class WileyHomePage {
     public void checkK12GeneralSubjectsItem() {
         driver.findElement(menuItemK12General).isDisplayed();
         Assert.assertTrue((driver.findElement(menuItemK12General).getLocation().x
-                +driver.findElement(menuItemK12General).getSize().width)<620);
+                + driver.findElement(menuItemK12General).getSize().width) <= titleSubjectSize);
     }
 
     /**
@@ -287,7 +303,7 @@ public class WileyHomePage {
     public void checkHigherEducationGeneralSubjectsItem() {
         driver.findElement(menuItemHigherEducationGeneral).isDisplayed();
         Assert.assertTrue((driver.findElement(menuItemHigherEducationGeneral).getLocation().x
-                +driver.findElement(menuItemHigherEducationGeneral).getSize().width)<620);
+                + driver.findElement(menuItemHigherEducationGeneral).getSize().width) <= titleSubjectSize);
     }
 
     /**
@@ -296,7 +312,7 @@ public class WileyHomePage {
     public void checkVocationalTechnologySubjectsItem() {
         driver.findElement(menuItemVocationalTechnology).isDisplayed();
         Assert.assertTrue((driver.findElement(menuItemVocationalTechnology).getLocation().x
-                +driver.findElement(menuItemVocationalTechnology).getSize().width)<620);
+                + driver.findElement(menuItemVocationalTechnology).getSize().width) <= titleSubjectSize);
     }
 
     /**
@@ -305,15 +321,16 @@ public class WileyHomePage {
     public void checkConflictResolutionAndMediationSubjectsItem() {
         driver.findElement(menuItemConflictResolutionAndMediation).isDisplayed();
         Assert.assertTrue((driver.findElement(menuItemConflictResolutionAndMediation).getLocation().x
-                +driver.findElement(menuItemConflictResolutionAndMediation).getSize().width)<620);
+                + driver.findElement(menuItemConflictResolutionAndMediation).getSize().width) <= titleSubjectSize);
     }
+
     /**
      * Check that "Curriculum Tools- General" is Displayed
      */
     public void checkCurriculumToolsGeneralSubjectsItem() {
         driver.findElement(menuItemCurriculumToolsGeneral).isDisplayed();
         Assert.assertTrue((driver.findElement(menuItemCurriculumToolsGeneral).getLocation().x
-                +driver.findElement(menuItemCurriculumToolsGeneral).getSize().width)<620);
+                + driver.findElement(menuItemCurriculumToolsGeneral).getSize().width) <= titleSubjectSize);
     }
 
     /**
@@ -322,7 +339,7 @@ public class WileyHomePage {
     public void checkSpecialEducationalNeedsSubjectsItem() {
         driver.findElement(menuItemSpecialEducationalNeeds).isDisplayed();
         Assert.assertTrue((driver.findElement(menuItemSpecialEducationalNeeds).getLocation().x
-                +driver.findElement(menuItemSpecialEducationalNeeds).getSize().width)<620);
+                + driver.findElement(menuItemSpecialEducationalNeeds).getSize().width) <= titleSubjectSize);
     }
 
     /**
@@ -331,7 +348,7 @@ public class WileyHomePage {
     public void checkTheoryOfEducationSubjectsItem() {
         driver.findElement(menuItemTheoryOfEducation).isDisplayed();
         Assert.assertTrue((driver.findElement(menuItemTheoryOfEducation).getLocation().x
-                +driver.findElement(menuItemTheoryOfEducation).getSize().width)<620);
+                + driver.findElement(menuItemTheoryOfEducation).getSize().width) <= titleSubjectSize);
     }
 
     /**
@@ -340,7 +357,7 @@ public class WileyHomePage {
     public void checkEducationSpecialTopicsSubjectsItem() {
         driver.findElement(menuItemEducationSpecialTopics).isDisplayed();
         Assert.assertTrue((driver.findElement(menuItemEducationSpecialTopics).getLocation().x
-                +driver.findElement(menuItemEducationSpecialTopics).getSize().width)<620);
+                + driver.findElement(menuItemEducationSpecialTopics).getSize().width) <= titleSubjectSize);
     }
 
     /**
@@ -349,7 +366,7 @@ public class WileyHomePage {
     public void checkEducationalResearchAndStatisticsSubjectsItem() {
         driver.findElement(menuItemEducationalResearchAndStatistics).isDisplayed();
         Assert.assertTrue((driver.findElement(menuItemEducationalResearchAndStatistics).getLocation().x
-                +driver.findElement(menuItemEducationalResearchAndStatistics).getSize().width)<620);
+                + driver.findElement(menuItemEducationalResearchAndStatistics).getSize().width) <= titleSubjectSize);
     }
 
     /**
@@ -358,7 +375,7 @@ public class WileyHomePage {
     public void checkLiteracyAndReadingSubjectsItem() {
         driver.findElement(menuItemLiteracyAndReading).isDisplayed();
         Assert.assertTrue((driver.findElement(menuItemLiteracyAndReading).getLocation().x
-                +driver.findElement(menuItemLiteracyAndReading).getSize().width)<620);
+                + driver.findElement(menuItemLiteracyAndReading).getSize().width) <= titleSubjectSize);
     }
 
     /**
@@ -367,10 +384,10 @@ public class WileyHomePage {
     public void checkClassroomManagementSubjectsItem() {
         driver.findElement(menuItemClassroomManagement).isDisplayed();
         Assert.assertTrue((driver.findElement(menuItemClassroomManagement).getLocation().x
-                +driver.findElement(menuItemClassroomManagement).getSize().width)<620);
+                + driver.findElement(menuItemClassroomManagement).getSize().width) <= titleSubjectSize);
     }
 
-    public void countSubjectItems(){
+    public void countSubjectItems() {
         int items = driver.findElements(menuItems).size();
         Assert.assertEquals(items, 13);
     }

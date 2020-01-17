@@ -20,17 +20,26 @@ public class ThirdTest {
     @Test
     public void secondTestSearchBox() throws InterruptedException {
         WileyHomePage objWHP = new WileyHomePage(driver);
+
+        //then I opened url appear choice location window
         objWHP.clickYesInChoseLocationWindow();
 
+        //Enter “Java” in the search input
         objWHP.inputWordInSearchBox("Java");
+        //press the search button 
         objWHP.clickButtonSearch();
 
         SearchResultPage obSRP = new SearchResultPage(driver);
+        //Only titles containing “Java” are displayed 
         obSRP.checkThatAllTitlesContainsJava();
+        //  There are 10 titles on the page
         obSRP.checkThatOnly10TitlesOnPage();
 
+        //Each title has at least one “Add to Cart” button for E-Book
         obSRP.checkIfEBookThanHasAddToCardButton();
+        //Each title has at least one “Add to Cart” button for Print
         obSRP.checkIfPrintThanHasAddToCardButton();
+        //Each title has at least one “VIEW ON WILEY ONLINE LIBRARY” for O-BOOK
         obSRP.checkIfOBookThanHasViewOnWileyOnlineLibraryButton();
     }
 
