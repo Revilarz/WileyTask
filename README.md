@@ -3,18 +3,20 @@
 test task from Wiley Co.
 ````
 
-##Getting Started
+## Getting Started
 ```
 These instructions will get you a copy of the project up and running on your
 local machine for testing purposes. 
 ```
-###Prerequisites
+### Prerequisites
 ```
 What things you need for runing this code:
 - clone this project on your PC
 - open IDEA and open project
+- JDK 12
+- GoogleChrome v79
 ```
-##Running the tests
+## Running the tests
 ````
 For running UI tests:
 1. Open folder WileyTask/src/test/java/UI_Tests/Tests
@@ -30,7 +32,7 @@ For running API tests:
     2.2. Some tests in PostApiRequest faild because some tests data make normal post request and 
     get status 200.
 ````
-##Built With
+## Built With
 ````
 - [selenium-java](https://selenium.dev/)
 - [junit](https://junit.org/junit4/)
