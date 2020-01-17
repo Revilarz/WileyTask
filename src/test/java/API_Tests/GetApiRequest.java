@@ -71,7 +71,7 @@ public class GetApiRequest {
         //System.out.println(response.getStatusCode());
         Assert.assertEquals(response.getStatusCode(),200);
         //System.out.println(count);
-        Assert.assertEquals(count , 4);
+        Assert.assertTrue(count ==4);
     }
 
     /**
