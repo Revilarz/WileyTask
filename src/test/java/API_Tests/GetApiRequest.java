@@ -1,19 +1,15 @@
-package API;
+package API_Tests;
 
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -46,7 +42,7 @@ public class GetApiRequest {
         //System.out.println(response.getStatusCode());
         Assert.assertEquals(response.getStatusCode(),200);
         //System.out.println(count);
-        Assert.assertTrue(count >= 4);
+        Assert.assertEquals(count,4);
     }
 
     /**
@@ -75,7 +71,7 @@ public class GetApiRequest {
         //System.out.println(response.getStatusCode());
         Assert.assertEquals(response.getStatusCode(),200);
         //System.out.println(count);
-        Assert.assertTrue(count >= 4);
+        Assert.assertEquals(count , 4);
     }
 
     /**
@@ -96,7 +92,7 @@ public class GetApiRequest {
         //System.out.println(resp.getStatusCode());
         Assert.assertEquals(resp.getStatusCode(),200);
         //System.out.println(count);
-        Assert.assertTrue(count >= 4);
+        Assert.assertEquals(count,4);
     }
 
     @Test
