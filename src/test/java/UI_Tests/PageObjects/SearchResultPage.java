@@ -60,7 +60,6 @@ public class SearchResultPage {
         } else {
             i++;
         }
-        driver.findElement(By.xpath(".//*[@href='http://onlinelibrary.wiley.com/resolve/openurl?genre=book&isbn="+dataCodeOBook+"']")).isDisplayed();
+        driver.findElement(By.xpath(".//*[@href='http://onlinelibrary.wiley.com/resolve/openurl?genre=book&isbn=" + dataCodeOBook + "']")).isDisplayed();
     }
-
 }

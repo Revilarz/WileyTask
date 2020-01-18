@@ -6,6 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+/**
+ * 1.	Check items under Who We Serve for sub-header 
+ * ·                     There are 11 items under resources sub-header 
+ * ·                     Titles are “Students”, “Instructors”, “Book Authors”, “Professionals”, “Researchers”, “Institutions”, “Librarians”, “Corporations”, “Societies”, “Journal Editors”, “Government” 
+ */
 public class FirstTest {
     private ChromeDriver driver;
 
@@ -47,5 +52,4 @@ public class FirstTest {
     public void quitBrowser() {
         driver.quit();
     }
-
 }

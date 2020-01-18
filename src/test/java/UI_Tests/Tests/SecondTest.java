@@ -6,6 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+/**
+ * 2.	Check search functionality:
+ * Enter “Java” in the search input and do not press the search button (with magnifying glass icon)
+ * ·                     Area with related content is displayed right under the search header 
+ */
 public class SecondTest {
     private ChromeDriver driver;
 

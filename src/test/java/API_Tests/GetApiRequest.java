@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public class GetApiRequest {
 
     /**
-     *4 suggestions contain attribute "term" : value starting with the preformatted highlighted word java inside like <span class=\"search-highlight\">java</span>
+     * 4 suggestions contain attribute "term" : value starting with the preformatted highlighted word java inside like <span class=\"search-highlight\">java</span>
      */
     @Test
     public void testFirstApiTestFirstPart() {
@@ -40,9 +40,9 @@ public class GetApiRequest {
             count++;
         }
         //System.out.println(response.getStatusCode());
-        Assert.assertEquals(response.getStatusCode(),200);
+        Assert.assertEquals(response.getStatusCode(), 200);
         //System.out.println(count);
-        Assert.assertEquals(count,4);
+        Assert.assertEquals(count, 4);
     }
 
     /**
@@ -69,9 +69,9 @@ public class GetApiRequest {
             count++;
         }
         //System.out.println(response.getStatusCode());
-        Assert.assertEquals(response.getStatusCode(),200);
+        Assert.assertEquals(response.getStatusCode(), 200);
         //System.out.println(count);
-        Assert.assertTrue(count ==4);
+        Assert.assertTrue(count == 4);//(if can be more then 4, change "==" on ">="
     }
 
     /**
@@ -90,9 +90,9 @@ public class GetApiRequest {
             count++;
         }
         //System.out.println(resp.getStatusCode());
-        Assert.assertEquals(resp.getStatusCode(),200);
+        Assert.assertEquals(resp.getStatusCode(), 200);
         //System.out.println(count);
-        Assert.assertEquals(count,4);
+        Assert.assertEquals(count, 4);
     }
 
     /**
@@ -100,7 +100,7 @@ public class GetApiRequest {
      * Make GET request and check if image has got width 300 px
      */
     @Test
-    public void testApiLetterB(){
+    public void testApiLetterB() {
 
         //make get response for getting all images without reiteration
         Response resp = RestAssured.get("https://www.wiley.com/en-us/search/autocomplete/comp_00001H9J?term=Java");
@@ -124,11 +124,10 @@ public class GetApiRequest {
         chromeOptions.addArguments("--headless");
         driver = new ChromeDriver(chromeOptions);
         Iterator<String> iterator = images.iterator();
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             driver.get(iterator.next());
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/img")).getSize().width,300);
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/img")).getSize().width, 300);
             //System.out.println(driver.findElement(By.xpath("/html/body/img")).getSize().width);
         }
     }
-
 }

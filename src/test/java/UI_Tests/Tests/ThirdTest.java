@@ -7,6 +7,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+/**
+ * 3.	Enter “Java” in the search input and press the search button 
+ * ·                     Only titles containing “Java” are displayed 
+ * ·                     There are 10 titles on the page
+ * ·                     Each title has at least one “Add to Cart” button for E-Book/Print version and “VIEW ON WILEY ONLINE LIBRARY” for O-BOOK version
+ */
 public class ThirdTest {
     private ChromeDriver driver;
 
@@ -37,8 +43,10 @@ public class ThirdTest {
 
         //Each title has at least one “Add to Cart” button for E-Book
         obSRP.checkIfEBookThanHasAddToCardButton();
+
         //Each title has at least one “Add to Cart” button for Print
         obSRP.checkIfPrintThanHasAddToCardButton();
+
         //Each title has at least one “VIEW ON WILEY ONLINE LIBRARY” for O-BOOK
         obSRP.checkIfOBookThanHasViewOnWileyOnlineLibraryButton();
     }

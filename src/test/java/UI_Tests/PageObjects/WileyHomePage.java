@@ -209,7 +209,7 @@ public class WileyHomePage {
     public void checkByXPos() {
         int searchBoxXPos = driver.findElement(searchBox).getLocation().x;
         int contextMenuXPos = driver.findElement(contextMenu).getLocation().x;
-        Assert.assertEquals(searchBoxXPos,contextMenuXPos);
+        Assert.assertEquals(searchBoxXPos, contextMenuXPos);
     }
 
     /**
@@ -218,7 +218,7 @@ public class WileyHomePage {
     public void checkByWidth() {
         int searchBoxWidth = driver.findElement(searchBox).getSize().width;
         int searchButtonWidth = driver.findElement(searchButton).getSize().width;
-        int inputGroupWidth = searchBoxWidth+searchButtonWidth;
+        int inputGroupWidth = searchBoxWidth + searchButtonWidth;
         int contextMenuWidth = driver.findElement(contextMenu).getSize().width;
         Assert.assertEquals(inputGroupWidth, contextMenuWidth);
     }
