@@ -11,16 +11,18 @@ public class PostApiRequest {
     /**
      * Negative tests
      */
-    public void testPostRequestNegative(String strTime) {
+    public void testPostRequestNegative(String strTime, int intStatusCode) {
         Response resp = RestAssured.post("https://httpbin.org/delay/" + strTime);
         String data = resp.asString();
         if (resp.getStatusCode() == 404) {
+            Assert.assertEquals(resp.getStatusCode(), intStatusCode);
             Assert.assertEquals(data, "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN\">\n" +
                     "<title>404 Not Found</title>\n" +
                     "<h1>Not Found</h1>\n" +
                     "<p>The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.</p>\n");
         } else {
             if (resp.getStatusCode() == 500) {
+                Assert.assertEquals(resp.getStatusCode(), intStatusCode);
                 Assert.assertEquals(data, "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN\">\n" +
                         "<title>500 Internal Server Error</title>\n" +
                         "<h1>Internal Server Error</h1>\n" +
@@ -28,7 +30,7 @@ public class PostApiRequest {
             } else {
                 //System.out.println(resp.getStatusCode());
                 //System.out.println(data);
-                Assert.assertNotEquals(resp.getStatusCode(), 200);
+                Assert.assertEquals(resp.getStatusCode(), intStatusCode);
             }
         }
 
@@ -84,78 +86,93 @@ public class PostApiRequest {
         }*/
     }
 
+    //positive data, should be OK like Status Code - 2xx: Success (успешно)
     @Test
     public void testsPostRequestPositive0sec() {
         testPostRequestPositive(0);
     }
 
+    //positive data, should be OK like Status Code - 2xx: Success (успешно)
     @Test
     public void testsPostRequestPositive1sec() {
         testPostRequestPositive(1);
     }
 
+    //positive data, should be OK like Status Code - 2xx: Success (успешно)
     @Test
     public void testsPostRequestPositive5sec() {
         testPostRequestPositive(05);
     }
 
+    //positive data, should be OK like Status Code - 2xx: Success (успешно)
     @Test
     public void testsPostRequestPositive9sec() {
         testPostRequestPositive(9);
     }
 
+    //positive data, should be OK like Status Code - 2xx: Success (успешно)
     @Test
     public void testsPostRequestPositive10sec() {
         testPostRequestPositive(10);
     }
 
+    //negative data -1, should be error like Status Code = 4xx: Client Error (ошибка клиента)
     @Test
     public void testsPostRequestNegativeMinus1sec() {
-        testPostRequestNegative("-1");
+        testPostRequestNegative("-1",400);
     }
 
+    //negative data 11, should be error like Status Code = 4xx: Client Error (ошибка клиента)
     @Test
     public void testsPostRequestNegative11sec() {
-        testPostRequestNegative("11");
+        testPostRequestNegative("11",400);
     }
 
+    //negative data -1, should be error like Status Code = 4xx: Client Error (ошибка клиента)
     @Test
     public void testsPostRequestNegativeMinus1000sec() {
-        testPostRequestNegative("-1000");
+        testPostRequestNegative("-1000",400);
     }
 
+    //negative data -1, should be error like Status Code = 4xx: Client Error (ошибка клиента)
     @Test
     public void testsPostRequestNegative9999sec() {
-        testPostRequestNegative("9999");
+        testPostRequestNegative("9999",400);
     }
 
+    //negative data - empty request, should be error like Status Code = 4xx: Client Error (ошибка клиента)
     @Test
     public void testsPostRequestNegativeEmpty() {
-        testPostRequestNegative(" ");
+        testPostRequestNegative(" ",404);
     }
 
+    //negative data - empty request, should be error like Status Code = 4xx: Client Error (ошибка клиента)
     @Test
     public void testsPostRequestNegativeCharWithDot() {
-        testPostRequestNegative("0.1");
+        testPostRequestNegative("0.1",415);
     }
 
+    //negative data - empty request, should be error like Status Code = 4xx: Client Error (ошибка клиента) or 5xx: Server Error (ошибка сервера)
     @Test
     public void testsPostRequestNegativeCharWithPoint() {
-        testPostRequestNegative("0,1");
+        testPostRequestNegative("0,1",500);
     }
 
+    //negative data - 0/5, should be error like Status Code = 4xx: Client Error (ошибка клиента)
     @Test
     public void testsPostRequestNegativeCharWithSlash() {
-        testPostRequestNegative("0/5");
+        testPostRequestNegative("0/5",404);
     }
 
+    //negative data - 8x, should be error like Status Code = 4xx: Client Error (ошибка клиента) or 5xx: Server Error (ошибка сервера)
     @Test
     public void testsPostRequestNegativeLetterAndInt() {
-        testPostRequestNegative("8x");
+        testPostRequestNegative("8x",500);
     }
 
+    //negative data - special symbols, should be error like Status Code = 4xx: Client Error (ошибка клиента)
     @Test
     public void testsPostRequestNegativeSpecialSymbols() {
-        testPostRequestNegative("!№;%:?*()/*+-./|");
+        testPostRequestNegative("!№;%:?*()/*+-./|",500);
     }
 }
