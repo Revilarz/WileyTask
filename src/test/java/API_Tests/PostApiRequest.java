@@ -117,24 +117,28 @@ public class PostApiRequest {
     }
 
     //negative data -1, should be error like Status Code = 4xx: Client Error (ошибка клиента)
+    //if Status Code = 200 is OK< then change 400 on 200
     @Test
     public void testsPostRequestNegativeMinus1sec() {
         testPostRequestNegative("-1",400);
     }
 
     //negative data 11, should be error like Status Code = 4xx: Client Error (ошибка клиента)
+    //if Status Code = 200 is OK< then change 400 on 200
     @Test
     public void testsPostRequestNegative11sec() {
         testPostRequestNegative("11",400);
     }
 
     //negative data -1, should be error like Status Code = 4xx: Client Error (ошибка клиента)
+    //if Status Code = 200 is OK< then change 400 on 200
     @Test
     public void testsPostRequestNegativeMinus1000sec() {
         testPostRequestNegative("-1000",400);
     }
 
     //negative data -1, should be error like Status Code = 4xx: Client Error (ошибка клиента)
+    //if Status Code = 200 is OK< then change 400 on 200
     @Test
     public void testsPostRequestNegative9999sec() {
         testPostRequestNegative("9999",400);
@@ -146,7 +150,8 @@ public class PostApiRequest {
         testPostRequestNegative(" ",404);
     }
 
-    //negative data - empty request, should be error like Status Code = 4xx: Client Error (ошибка клиента)
+    //negative data - empty request, should be error like Status Code = 4xx: Client Error (ошибка клиента) (in this situation i think should be 415 Unsupported Media Type)
+    //if Status Code = 200 is OK< then change 415 on 200
     @Test
     public void testsPostRequestNegativeCharWithDot() {
         testPostRequestNegative("0.1",415);
