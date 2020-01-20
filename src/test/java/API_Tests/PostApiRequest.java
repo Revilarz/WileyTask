@@ -57,8 +57,10 @@ public class PostApiRequest {
             Assert.assertEquals(jsonPathValidator.get("data") + "", "");
             Assert.assertEquals(jsonPathValidator.get("files") + "", "{}");
             Assert.assertEquals(jsonPathValidator.get("form") + "", "{}");
-            Assert.assertEquals(jsonPathValidator.get("headers") + "", "{Accept=*/*, Accept-Encoding=gzip,deflate, Host=httpbin.org, User-Agent=Apache-HttpClient/4.5.3 (Java/12.0.2)}");
-            Assert.assertEquals(jsonPathValidator.get("origin") + "", "128.68.36.17, 128.68.36.17");
+            //on this header should be your java version
+            //Assert.assertEquals(jsonPathValidator.get("headers") + "", "{Accept=*/*, Accept-Encoding=gzip,deflate, Host=httpbin.org, User-Agent=Apache-HttpClient/4.5.3 (Java/12.0.2)}");
+            //on this origin shold be host
+            //Assert.assertEquals(jsonPathValidator.get("origin") + "", "128.68.36.17, 128.68.36.17");
             Assert.assertEquals(jsonPathValidator.get("url") + "", "https://httpbin.org/delay/" + strTime);
         } else {
             JsonPath jsonPathValidator = resp1.jsonPath();
@@ -68,8 +70,10 @@ public class PostApiRequest {
             Assert.assertEquals(jsonPathValidator.get("data") + "", "");
             Assert.assertEquals(jsonPathValidator.get("files") + "", "{}");
             Assert.assertEquals(jsonPathValidator.get("form") + "", "{}");
-            Assert.assertEquals(jsonPathValidator.get("headers") + "", "{Accept=*/*, Accept-Encoding=gzip,deflate, Host=httpbin.org, User-Agent=Apache-HttpClient/4.5.3 (Java/12.0.2)}");
-            Assert.assertEquals(jsonPathValidator.get("origin") + "", "128.68.36.17, 128.68.36.17");
+            //on this header should be your java version
+            //Assert.assertEquals(jsonPathValidator.get("headers") + "", "{Accept=*/*, Accept-Encoding=gzip,deflate, Host=httpbin.org, User-Agent=Apache-HttpClient/4.5.3 (Java/12.0.2)}");
+            //on this origin shold be host
+            //Assert.assertEquals(jsonPathValidator.get("origin") + "", "128.68.36.17, 128.68.36.17");
             Assert.assertEquals(jsonPathValidator.get("url") + "", "https://httpbin.org/delay/" + strTime);
         }
         //If all integer is Ok than this variant
