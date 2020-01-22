@@ -33,7 +33,7 @@ For running API tests:
     and get status 200.
 ````
 ## Built With
-````
+
 - [selenium-java](https://selenium.dev/)
 - [junit](https://junit.org/junit4/)
 - [rest-assured](http://rest-assured.io/)
